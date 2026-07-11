@@ -4,7 +4,7 @@
 
 .conversation-wrap {
   .agent-message {
-    @apply items-end flex flex-row justify-start mt-0 ltr:mr-0 rtl:mr-2 mb-0.5 ltr:ml-2 rtl:ml-0 max-w-[88%];
+    @apply items-end flex flex-row rtl:flex-row-reverse justify-start mt-0 ltr:mr-0 rtl:mr-0 mb-0.5 ltr:ml-2 rtl:ml-2 max-w-[88%];
 
     .avatar-wrap {
       @apply flex-shrink-0 h-6 w-6;
@@ -15,7 +15,7 @@
     }
 
     .message-wrap {
-      @apply flex-grow flex-shrink-0 ltr:ml-2 rtl:mr-2 max-w-[90%];
+      @apply flex-grow flex-shrink-0 ltr:ml-2 rtl:ml-2 max-w-[90%];
     }
   }
 
@@ -52,7 +52,7 @@
       @apply mt-0.5;
 
       .agent-message .chat-bubble {
-        @apply ltr:rounded-tl-[0.25rem] rtl:rounded-tr-[0.25rem];
+        @apply ltr:rounded-tl-[0.25rem] rtl:rounded-tl-[0.25rem];
       }
     }
 
@@ -74,10 +74,10 @@
   }
 
   .user-message {
-    @apply flex items-end flex-row justify-end max-w-[85%] ltr:text-right rtl:text-left mt-0 ltr:ml-auto rtl:mr-auto ltr:mr-1 rtl:ml-1 mb-0.5;
+    @apply flex items-end flex-row justify-end max-w-[85%] ltr:text-right rtl:text-right mt-0 ltr:ml-auto rtl:ml-auto ltr:mr-1 rtl:mr-1 mb-0.5;
 
     .message-wrap {
-      @apply max-w-full ltr:mr-2 rtl:ml-2;
+      @apply max-w-full ltr:mr-2 rtl:mr-2;
     }
 
     .in-progress {
@@ -108,7 +108,7 @@
       @apply mt-0.5;
 
       .user-message .chat-bubble {
-        @apply ltr:rounded-tr-[0.25rem] rtl:rounded-tl-[0.25rem];
+        @apply ltr:rounded-tr-[0.25rem] rtl:rounded-tr-[0.25rem];
       }
     }
 
@@ -191,7 +191,7 @@
   }
 
   &.user {
-    @apply ltr:rounded-br-[0.25rem] rtl:rounded-bl-[0.25rem];
+    @apply ltr:rounded-br-[0.25rem] rtl:rounded-br-[0.25rem];
 
     > a {
       @apply text-white;
@@ -199,7 +199,7 @@
   }
 
   &.agent {
-    @apply ltr:rounded-bl-[0.25rem] rtl:rounded-br-[0.25rem] text-n-slate-12;
+    @apply ltr:rounded-bl-[0.25rem] rtl:rounded-bl-[0.25rem] text-n-slate-12;
 
     .link {
       @apply text-n-brand;
