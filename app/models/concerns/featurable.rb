@@ -41,7 +41,11 @@ module Featurable
     save
   end
 
+  UNLOCKED_FEATURES = %w[captain_integration captain_integration_v2 disable_branding captain_document_auto_sync].freeze
+
   def feature_enabled?(name)
+    return true if UNLOCKED_FEATURES.include?(name.to_s)
+
     send("feature_#{name}?")
   end
 

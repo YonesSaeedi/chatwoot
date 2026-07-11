@@ -1,0 +1,27 @@
+name: Deploy Chatwoot
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 185.116.163.150
+          port: 3031
+          username: root
+          key: ${{ secrets.CHATWOOT_SSH_KEY }}
+          command_timeout: 60m
+          script: |
+            cd /opt/chatwoot-custom
+
+            git pull origin main
+
+            docker build -t chatwoot-custom:latest -f docker/Dockerfile .
+
+            docker compose -f docker-compose.production.yml up -d --force-recreate rails sidekiq
