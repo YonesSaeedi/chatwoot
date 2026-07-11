@@ -1,4 +1,12 @@
+FROM node:20-alpine AS widget-builder
+RUN apk add --no-cache git python3 make g++
+RUN git clone --depth=1 --branch v4.15.1 https://github.com/chatwoot/chatwoot.git /src
+WORKDIR /src
+COPY app/javascript/widget/assets/scss/views/_conversation.scss /src/app/javascript/widget/assets/scss/views/_conversation.scss
+RUN corepack enable && pnpm install --frozen-lockfile && npx vite build
+
 FROM chatwoot/chatwoot:latest
+COPY --from=widget-builder /src/public/vite /app/public/vite
 COPY app/models/concerns/featurable.rb /app/app/models/concerns/featurable.rb
 COPY app/views/widgets/show.html.erb /app/app/views/widgets/show.html.erb
 COPY public/fonts /app/public/fonts
