@@ -24,7 +24,24 @@
         font-style: normal;
       }
       * { font-family: 'IRANYekan', sans-serif !important; }
+      [dir="rtl"] .i-lucide-chevron-right { transform: scaleX(-1); display: inline-block; }
     </style>
+    <script>
+      (function() {
+        var logoSVG = '<svg width="48" height="36" viewBox="0 0 295 218" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 88.0831H294.587L237.649 0H56.938L0 88.0831Z" fill="#CBB992"/><path d="M28.4684 116.551L0 160.617H294.587L266.118 116.551H28.4684Z" fill="#CBB992"/><path d="M13.6498 196.395L0 217.501H294.587L280.938 196.395H13.6498Z" fill="#CBB992"/></svg>';
+        function injectLogo() {
+          var box = document.querySelector('.shadow.outline-1.outline');
+          if (box && !box.querySelector('.zargit-logo')) {
+            var wrap = document.createElement('div');
+            wrap.className = 'zargit-logo';
+            wrap.style.cssText = 'display:flex;justify-content:center;padding:4px 0 8px;';
+            wrap.innerHTML = logoSVG;
+            box.insertBefore(wrap, box.firstChild);
+          }
+        }
+        new MutationObserver(injectLogo).observe(document.documentElement, { childList: true, subtree: true });
+      })();
+    </script>
     <script>
       window.chatwootWebChannel = {
         avatarUrl: '<%= @web_widget.inbox.avatar_url %>',
