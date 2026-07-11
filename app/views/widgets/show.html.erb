@@ -33,10 +33,26 @@
       window.authToken = '<%= @token %>'
       window.globalConfig = <%= raw @global_config.to_json %>
     </script>
-    <style>
-      [dir="rtl"] .user-message-wrap .flex.justify-end { justify-content: flex-start !important; }
-      [dir="rtl"] .agent-message { flex-direction: row-reverse !important; justify-content: flex-end !important; }
-    </style>
+    <script>
+      (function() {
+        function fixLayout() {
+          var isRTL = document.documentElement.dir === 'rtl';
+          if (!isRTL) return;
+          document.querySelectorAll('.user-message-wrap .message-wrap .flex').forEach(function(el) {
+            el.style.setProperty('justify-content', 'flex-start', 'important');
+          });
+          document.querySelectorAll('.agent-message').forEach(function(el) {
+            el.style.setProperty('flex-direction', 'row-reverse', 'important');
+            el.style.setProperty('justify-content', 'flex-end', 'important');
+          });
+        }
+        var observer = new MutationObserver(fixLayout);
+        document.addEventListener('DOMContentLoaded', function() {
+          observer.observe(document.body, { childList: true, subtree: true });
+          fixLayout();
+        });
+      })();
+    </script>
     <%= vite_client_tag %>
     <%= vite_javascript_tag 'widget' %>
   </head>
