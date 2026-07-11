@@ -1,0 +1,4 @@
+FROM chatwoot/chatwoot:latest
+COPY app/models/concerns/featurable.rb /app/app/models/concerns/featurable.rb
+COPY app/views/widgets/show.html.erb /app/app/views/widgets/show.html.erb
+COPY public/fonts /app/public/fonts
