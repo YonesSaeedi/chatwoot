@@ -36,8 +36,6 @@
     <script>
       (function() {
         function fixLayout() {
-          var isRTL = document.documentElement.dir === 'rtl';
-          if (!isRTL) return;
           document.querySelectorAll('.user-message-wrap .message-wrap .flex').forEach(function(el) {
             el.style.setProperty('justify-content', 'flex-start', 'important');
           });
@@ -46,11 +44,12 @@
             el.style.setProperty('justify-content', 'flex-end', 'important');
           });
         }
-        var observer = new MutationObserver(fixLayout);
-        document.addEventListener('DOMContentLoaded', function() {
-          observer.observe(document.body, { childList: true, subtree: true });
-          fixLayout();
-        });
+        new MutationObserver(function(mutations) {
+          mutations.forEach(function(m) {
+            if (m.attributeName === 'dir') fixLayout();
+          });
+        }).observe(document.documentElement, { attributes: true });
+        new MutationObserver(fixLayout).observe(document.documentElement, { childList: true, subtree: true });
       })();
     </script>
     <%= vite_client_tag %>
