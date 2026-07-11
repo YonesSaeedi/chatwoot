@@ -30,6 +30,21 @@
     <script>
       (function() {
         var logoSVG = '<svg width="120" height="89" viewBox="0 0 295 218" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 88.0831H294.587L237.649 0H56.938L0 88.0831Z" fill="#CBB992"/><path d="M28.4684 116.551L0 160.617H294.587L266.118 116.551H28.4684Z" fill="#CBB992"/><path d="M13.6498 196.395L0 217.501H294.587L280.938 196.395H13.6498Z" fill="#CBB992"/></svg>';
+        function fixMessageLayout() {
+          document.querySelectorAll('.agent-message').forEach(function(el) {
+            el.style.flexDirection = 'row-reverse';
+            el.style.marginLeft = '0';
+            el.style.marginRight = '0.5rem';
+            var mw = el.querySelector('.message-wrap');
+            if (mw) { mw.style.marginRight = '0'; mw.style.marginLeft = '0.5rem'; }
+          });
+          document.querySelectorAll('.user-message').forEach(function(el) {
+            el.style.marginRight = '0.25rem';
+            el.style.marginLeft = 'auto';
+            var mw = el.querySelector('.message-wrap');
+            if (mw) { mw.style.marginLeft = '0'; mw.style.marginRight = '0.5rem'; }
+          });
+        }
         function injectLogo() {
           var box = document.querySelector('.shadow.outline-1.outline');
           if (box && !document.querySelector('.zargit-logo')) {
@@ -40,7 +55,8 @@
             box.parentNode.insertBefore(wrap, box);
           }
         }
-        new MutationObserver(injectLogo).observe(document.documentElement, { childList: true, subtree: true });
+        function onMutation() { fixMessageLayout(); injectLogo(); }
+        new MutationObserver(onMutation).observe(document.documentElement, { childList: true, subtree: true });
       })();
     </script>
     <script>
