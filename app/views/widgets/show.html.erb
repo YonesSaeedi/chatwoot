@@ -34,12 +34,8 @@
       window.globalConfig = <%= raw @global_config.to_json %>
     </script>
     <style>
-      [dir="rtl"] .user-message-wrap,
-      [dir="rtl"] .agent-message-wrap { direction: ltr; }
-      [dir="rtl"] .user-message-wrap .chat-bubble,
-      [dir="rtl"] .agent-message-wrap .chat-bubble,
-      [dir="rtl"] .user-message-wrap p,
-      [dir="rtl"] .agent-message-wrap p { direction: rtl; text-align: right; }
+      [dir="rtl"] .user-message-wrap .message-wrap > .flex { justify-content: flex-start !important; }
+      [dir="rtl"] .agent-message-wrap > .group > .flex { flex-direction: row-reverse !important; justify-content: flex-end !important; }
     </style>
     <%= vite_client_tag %>
     <%= vite_javascript_tag 'widget' %>
