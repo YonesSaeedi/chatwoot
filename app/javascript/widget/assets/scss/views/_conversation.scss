@@ -4,7 +4,11 @@
 
 .conversation-wrap {
   .agent-message {
-    @apply items-end flex flex-row rtl:flex-row-reverse justify-start mt-0 ltr:mr-0 rtl:mr-0 mb-0.5 ltr:ml-2 rtl:ml-2 max-w-[88%];
+    @apply items-end flex flex-row justify-start mt-0 ltr:mr-0 rtl:mr-0 mb-0.5 ltr:ml-2 rtl:ml-2 max-w-[88%];
+
+    [dir="rtl"] & {
+      flex-direction: row-reverse;
+    }
 
     .avatar-wrap {
       @apply flex-shrink-0 h-6 w-6;
